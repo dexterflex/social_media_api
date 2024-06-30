@@ -1,0 +1,33 @@
+2024-06-29T21:31:17.551Z [[32minfo[39m]:  : / : POST : {"email":"vk281977@gmail.com","password":"vivekkumar@"}
+2024-06-29T21:33:25.178Z [[32minfo[39m]:  : /api/signin : POST : {"email":"vk281977@gmail.com","password":"vivekkumar@"}
+2024-06-29T21:35:47.133Z [[32minfo[39m]:  : /api/signup : POST : {"name":"vivek kumar","email":"vk281977@gmail.com","password":"vivekkumar@"}
+2024-06-29T21:35:53.881Z [[32minfo[39m]:  : /api/signup : POST : {"name":"vivek kumar","email":"vk281977@gmail.com","password":"vivekkumar@3"}
+2024-06-29T21:48:15.065Z [[32minfo[39m]:  : /api/signup : POST : {"name":"vivek kumar","email":"vk281977@gmail.com","password":"vivekkumar@3"}
+2024-06-29T21:49:37.230Z [[32minfo[39m]:  : /api/signin : POST : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-29T21:49:47.140Z [[32minfo[39m]:  : /api/posts/all : POST : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-29T21:50:03.627Z [[32minfo[39m]:  : /api/posts/all : GET : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-29T21:50:12.137Z [[32minfo[39m]:  : /api/posts/all : GET : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-29T21:50:15.454Z [[32minfo[39m]:  : /api/posts/ : GET : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-29T21:50:31.755Z [[32minfo[39m]:  : /api/posts/ : GET : {"email":"vk281977@gmail.com","password":"vivekkumar@1"}
+2024-06-30T20:14:59.764Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:14:59.877Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:15:00.617Z [[32minfo[39m]:  : /favicon.ico : GET : {}
+2024-06-30T20:15:12.213Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:15:12.269Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:18:42.366Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:18:42.451Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:19:17.875Z [[32minfo[39m]:  : /api-docs : GET : {}
+2024-06-30T20:19:17.889Z [[32minfo[39m]:  : /api-docs/ : GET : {}
+2024-06-30T20:19:17.927Z [[32minfo[39m]:  : /api-docs/swagger-ui.css : GET : {}
+2024-06-30T20:19:17.930Z [[32minfo[39m]:  : /api-docs/swagger-ui-bundle.js : GET : {}
+2024-06-30T20:19:17.932Z [[32minfo[39m]:  : /api-docs/swagger-ui-standalone-preset.js : GET : {}
+2024-06-30T20:19:17.938Z [[32minfo[39m]:  : /api-docs/swagger-ui-init.js : GET : {}
+2024-06-30T20:19:18.435Z [[32minfo[39m]:  : /api-docs/ : GET : {}
+2024-06-30T20:19:18.664Z [[32minfo[39m]:  : /api-docs/favicon-32x32.png : GET : {}
+2024-06-30T20:19:59.475Z [[32minfo[39m]:  : /api-docs/ : GET : {}
+2024-06-30T20:19:59.534Z [[32minfo[39m]:  : /api-docs/swagger-ui.css : GET : {}
+2024-06-30T20:19:59.538Z [[32minfo[39m]:  : /api-docs/swagger-ui-bundle.js : GET : {}
+2024-06-30T20:19:59.543Z [[32minfo[39m]:  : /api-docs/swagger-ui-standalone-preset.js : GET : {}
+2024-06-30T20:19:59.545Z [[32minfo[39m]:  : /api-docs/swagger-ui-init.js : GET : {}
+2024-06-30T20:19:59.895Z [[32minfo[39m]:  : /api-docs/ : GET : {}
+2024-06-30T20:20:00.106Z [[32minfo[39m]:  : /api-docs/favicon-32x32.png : GET : {}

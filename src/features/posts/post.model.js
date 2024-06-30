@@ -1,6 +1,8 @@
 let count = 0;
+let posts = []
 
 export default class postModel {
+
     constructor(userId, caption, imageUrl) {
         this.id = ++count;
         this.userId = userId;
@@ -26,7 +28,7 @@ export default class postModel {
     // for extracting posts of current user
     static getPost(userId) {
         let userPosts = posts.filter(p => p.userId == userId);
-        return { success: true, userPosts }
+        return { success: true, posts: userPosts }
     }
 
     // for addding new post 
@@ -73,5 +75,3 @@ export default class postModel {
 
 
 
-
-let posts = []
