@@ -1,2 +1,16 @@
 2024-06-29T21:33:25.182Z [[31merror[39m]: Authentication Failed
 2024-06-29T21:35:53.885Z [[31merror[39m]: User Already exists
+2024-07-01T09:03:01.575Z [[31merror[39m]: Cannot access 'comments' before initialization
+2024-07-01T09:06:17.018Z [[31merror[39m]: Cannot access 'comments' before initialization
+2024-07-01T09:07:02.335Z [[31merror[39m]: Cannot access 'comments' before initialization
+2024-07-01T09:08:36.451Z [[31merror[39m]: Cannot access 'comments' before initialization
+2024-07-01T09:09:19.853Z [[31merror[39m]: Cannot access 'comments' before initialization
+2024-07-01T10:56:04.447Z [[31merror[39m]: res is not defined
+2024-07-01T11:00:55.023Z [[31merror[39m]: Cannot read properties of undefined (reading 'find')
+2024-07-01T11:17:15.243Z [[31merror[39m]: Cannot read properties of undefined (reading 'find')
+2024-07-11T04:55:47.396Z [[31merror[39m]: Cannot read properties of undefined (reading 'toUpperCase')
+2024-07-11T04:57:47.519Z [[31merror[39m]: isArchived is not defined
+2024-07-11T05:04:31.315Z [[31merror[39m]: isArchived is not defined
+2024-07-11T05:06:45.926Z [[31merror[39m]: isArchived is not defined
+2024-07-11T05:09:06.889Z [[31merror[39m]: isArchived is not defined
+2024-07-11T05:19:00.163Z [[31merror[39m]: postModel.isArchived is not a function

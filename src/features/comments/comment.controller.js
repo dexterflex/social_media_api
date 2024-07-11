@@ -32,7 +32,7 @@ export const deleteComment = (req, res) => {
 export const updateComment = (req, res) => {
     let id = req.params.id;
     let userId = req.cookies.userId;
-    let content = req.body;
+    let content = req.body.content;
 
     let response = commentModel.updateComment(id, userId, content);
 

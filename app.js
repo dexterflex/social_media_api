@@ -47,11 +47,12 @@ app.use((req, res) => {
 
 // Error handler middleware 
 app.use((err, req, res, next) => {
+    errorLogger.error(err.message)
     if (err instanceof ApplicationError) {
-        errorLogger.error(err.message)
         return res.status(err.statusCode).send(err.message)
     }
-    return res.status(500).send("Internal Server Error")
+    // return res.status(500).send("Internal Server Error")
+    return res.status(500).send(err.message)
 })
 
 

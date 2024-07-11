@@ -1,7 +1,7 @@
+let count = 0;
 let comments = [];
 
 export default class commentModel {
-    static count = 0;
     constructor(userId, postId, content) {
         this.id = ++count;
         this.userId = userId;
@@ -11,8 +11,8 @@ export default class commentModel {
 
     // for extracting commment of a specific post
     static getComment(postId) {
-        let comments = comments.filter(c => c.postId == postId)
-        return { success: true, comments }
+        let allComments = comments.filter(c => c.postId == postId)
+        return { success: true, comments: allComments }
     }
 
     // for adding new commment to a specific post

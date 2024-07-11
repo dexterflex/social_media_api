@@ -14,12 +14,12 @@ export class likeModel {
     // for extracting likes of a post
     static getLikes(postId) {
         let filteredLikes = likes.filter(l => l.postId == postId);
-        return filteredLikes;
+        return { success: true, likes: filteredLikes };
     }
 
     // for toggling the like status 
     static toggleLikes(userId, postId) {
-        let posts = postModel.allPosts().posts;
+        let posts = postModel.allPosts().allPosts;
 
         let post = posts.find(p => p.postId == postId);
 
