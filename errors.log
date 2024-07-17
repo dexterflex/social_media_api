@@ -14,3 +14,5 @@
 2024-07-11T05:06:45.926Z [[31merror[39m]: isArchived is not defined
 2024-07-11T05:09:06.889Z [[31merror[39m]: isArchived is not defined
 2024-07-11T05:19:00.163Z [[31merror[39m]: postModel.isArchived is not a function
+2024-07-16T10:38:26.559Z [[31merror[39m]: Cannot read properties of undefined (reading 'filename')
+2024-07-16T10:45:07.530Z [[31merror[39m]: p is not defined

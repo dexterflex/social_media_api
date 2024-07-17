@@ -1,475 +1,581 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Social Media API",
-        "version": "1.0.0",
-        "description": "API for Social Media Application"
-    },
-    "servers": [
-        {
-            "url": "http://localhost:3000/api"
-        }
-    ],
-    "paths": {
-        "/signin": {
-            "post": {
-                "tags": [
-                    "Authentication"
-                ],
-                "summary": "user authentication",
-                "description": "Providing the login to users",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "user authenticated"
-                    },
-                    "404": {
-                        "description": "authentication failed"
-                    }
-                }
-            }
-        },
-        "/signup": {
-            "post": {
-                "tags": [
-                    "Authentication"
-                ],
-                "summary": "user Registration",
-                "description": "Registering new User",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "user Registered"
-                    },
-                    "400": {
-                        "description": "Registration failed"
-                    }
-                }
-            }
-        },
-        "/logout": {
-            "get": {
-                "tags": [
-                    "Authentication"
-                ],
-                "summary": "user logout",
-                "description": "logging out User",
-                "responses": {
-                    "200": {
-                        "description": "user logged out"
-                    },
-                    "400": {
-                        "description": "log in first"
-                    }
-                }
-            }
-        },
-        "/posts/all": {
-            "get": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "all posts",
-                "description": "a list of posts",
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            }
-        },
-        "/posts": {
-            "get": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "user posts",
-                "description": "a list of posts by currrent user",
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "add post",
-                "description": "adds a new post",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "caption": {
-                                        "type": "string"
-                                    },
-                                    "imageUrl": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "created"
-                    },
-                    "404": {
-                        "description": "post not found"
-                    }
-                }
-            }
-        },
-        "/posts/{id}": {
-            "get": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "get post",
-                "description": "post by corresponding id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    },
-                    "404": {
-                        "description": "post not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "Delete post",
-                "description": "Delete post by corresponding id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    },
-                    "404": {
-                        "description": "post not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "update post",
-                "description": "update post by corresponding id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post"
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "caption": {
-                                        "type": "string"
-                                    },
-                                    "imageUrl": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    },
-                    "404": {
-                        "description": "post not found"
-                    }
-                }
-            }
-        },
-        "/posts/filter/filterbycaption": {
-            "get": {
-                "tags": [
-                    "Posts"
-                ],
-                "summary": "post by caption",
-                "description": "post based on its caption",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "caption",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            }
-        },
-        "/comments/{postId}": {
-            "get": {
-                "tags": [
-                    "comments"
-                ],
-                "summary": "get comments",
-                "description": "get the comments of a post by postId",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "postId",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post as a postId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "comments"
-                ],
-                "summary": "add comments",
-                "description": "add new comment of a post by postId",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "postId",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post as a postId"
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "content": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "new comment created"
-                    }
-                }
-            }
-        },
-        "/comments/{id}": {
-            "put": {
-                "tags": [
-                    "comments"
-                ],
-                "summary": "update comments",
-                "description": "update a comments by its id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the comment"
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "content": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated"
-                    },
-                    "404": {
-                        "description": "comment not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "comments"
-                ],
-                "summary": "delete comments",
-                "description": "delete a comments by its id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the comment"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "deleted"
-                    },
-                    "404": {
-                        "description": "comment not found"
-                    }
-                }
-            }
-        },
-        "/likes/{postId}": {
-            "get": {
-                "tags": [
-                    "likes"
-                ],
-                "summary": "get likes",
-                "description": "get the likes of a post by postId",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "postId",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post as a postId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            }
-        },
-        "/likes/toggle/{postId}": {
-            "get": {
-                "tags": [
-                    "likes"
-                ],
-                "summary": "toggle likes",
-                "description": "toggle the comments of a post by postId",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "postId",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "description": "Numeric ID for the post as a postId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    },
-                    "404": {
-                        "description": "post not found"
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Social Media API",
+    "version": "1.0.0",
+    "description": "API for Social Media Application"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
     }
+  ],
+  "paths": {
+    "/signin": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "user authentication",
+        "description": "Providing the login to users",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user authenticated"
+          },
+          "404": {
+            "description": "authentication failed"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "user Registration",
+        "description": "Registering new User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "user Registered"
+          },
+          "400": {
+            "description": "Registration failed"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": ["Authentication"],
+        "summary": "user logout",
+        "description": "logging out User",
+        "responses": {
+          "200": {
+            "description": "user logged out"
+          },
+          "400": {
+            "description": "log in first"
+          }
+        }
+      }
+    },
+    "/posts/all": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "all posts",
+        "description": "a list of posts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numerical value for page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "user posts",
+        "description": "a list of posts by currrent user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numerical value for page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "summary": "add post",
+        "description": "adds a new post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created"
+          },
+          "404": {
+            "description": "post not found"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "get post",
+        "description": "post by corresponding id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "post not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete post",
+        "description": "Delete post by corresponding id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "post not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Posts"],
+        "summary": "update post",
+        "description": "update post by corresponding id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "post not found"
+          }
+        }
+      }
+    },
+    "/posts/filter/filterbycaption": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "post by caption",
+        "description": "post based on its caption",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "caption",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/posts/archieve/{postId}": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Archieve post",
+        "description": "Archieve post by their postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/posts/bookmark/{postId}": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "bookmark post",
+        "description": "bookmark post by their postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/posts/archieve": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "archieved posts",
+        "description": "all posts in archieve folder",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/posts/bookmark": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "bookmarked posts",
+        "description": "all posts in bookmark folder",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/posts/draft": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "drafted posts",
+        "description": "all posts in draft folder",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "summary": "draft post",
+        "description": "draft a new post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "drafted"
+          }
+        }
+      }
+    },
+
+    "/comments/{postId}": {
+      "get": {
+        "tags": ["comments"],
+        "summary": "get comments",
+        "description": "get the comments of a post by postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post as a postId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      },
+      "post": {
+        "tags": ["comments"],
+        "summary": "add comments",
+        "description": "add new comment of a post by postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post as a postId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "new comment created"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "put": {
+        "tags": ["comments"],
+        "summary": "update comments",
+        "description": "update a comments by its id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the comment"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "updated"
+          },
+          "404": {
+            "description": "comment not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["comments"],
+        "summary": "delete comments",
+        "description": "delete a comments by its id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the comment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted"
+          },
+          "404": {
+            "description": "comment not found"
+          }
+        }
+      }
+    },
+    "/likes/{postId}": {
+      "get": {
+        "tags": ["likes"],
+        "summary": "get likes",
+        "description": "get the likes of a post by postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post as a postId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/likes/toggle/{postId}": {
+      "get": {
+        "tags": ["likes"],
+        "summary": "toggle likes",
+        "description": "toggle the comments of a post by postId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID for the post as a postId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "post not found"
+          }
+        }
+      }
+    }
+  }
 }

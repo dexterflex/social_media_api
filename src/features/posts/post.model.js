@@ -10,6 +10,14 @@ function isArchived(userId, post) {
     return false;
 }
 
+function isBookmark(userId, post) {
+    let result = post.Bookmark.find(pb => pb == userId);
+    if (result) {
+        return true;
+    }
+    return false;
+}
+
 export default class postModel {
 
     constructor(userId, caption, imageUrl) {
@@ -18,31 +26,50 @@ export default class postModel {
         this.caption = caption;
         this.imageUrl = imageUrl;
         this.Archived = [];
+        this.Bookmark = [];
         this.isDraft = false;
+        this.engagement = 0;
     }
 
 
 
     // for extracting all posts
-    static allPosts(userId) {
-        let allPosts = posts.filter(p => !isArchived(userId, p) && !p.isDraft)
-        return { success: true, allPosts: allPosts }
+    static allPosts(userId, page = 1) {
+        const startIndex = (page - 1) * 10;
+
+        // Filter posts based on userId, not archived, and not draft
+        let filteredPosts = posts.filter(p => !isArchived(userId, p) && !p.isDraft);
+
+        // Apply pagination: Slice the array to fetch only the subset of posts for the current page
+        let paginatedPosts = filteredPosts.slice(startIndex, startIndex + 10);
+
+        // Return the paginated result
+        return { success: true, allPosts: paginatedPosts };
     }
 
     // for extracting posts based on id 
     static postById = (id) => {
         let post = posts.find(p => p.id == id);
         if (post) {
+            post.engagement++;
             return { success: true, post }
         }
         return { success: false, msg: "not found" }
     }
 
+    // Function to fetch posts of the current user with pagination
+    static getPost(userId, page = 1) {
+        // Filter posts based on userId, not archived, and not draft
+        let filteredPosts = posts.filter(p => p.userId === userId && !isArchived(userId, p) && !p.isDraft);
 
-    // for extracting posts of current user
-    static getPost(userId) {
-        let userPosts = posts.filter(p => p.userId == userId && !isArchived(userId, p) && !p.isDraft);
-        return { success: true, userPosts }
+        // Calculate the start index of the subset of posts to fetch
+        const startIndex = (page - 1) * 10;
+
+        // Apply pagination: Slice the array to fetch only the subset of posts for the current page
+        let paginatedPosts = filteredPosts.slice(startIndex, startIndex + 10);
+
+        // Return the paginated result
+        return { success: true, userPosts: paginatedPosts };
     }
 
     // for addding new post 
@@ -94,24 +121,46 @@ export default class postModel {
 
     // to make post archieve 
     static toggleArchieve(postId, userId) {
-        let post = posts.find(p.id == postId);
-        let msg = ""
+        let post = posts.find(p => p.id == postId);
         if (post) {
+            let msg = ""
             let index = post.Archived.findIndex(pa => pa == userId);
             if (index != -1) {
                 post.Archived.splice(index)
-                msg: "deleted from Archieve"
+                msg = "deleted from Archieve"
             }
             else {
                 post.Archived.push(userId)
-                msg: "Added to Archieve"
+                msg = "Added to Archieve"
             }
-            return { success: true, msg }
+            return { success: true, msg, load: post }
         }
         else {
             return { success: false, msg: "post not found" }
         }
     }
+
+    // to make post bookmark
+    static toggleBookmark(postId, userId) {
+        let post = posts.find(p => p.id == postId);
+        if (post) {
+            let msg = ""
+            let index = post.Bookmark.findIndex(pa => pa == userId);
+            if (index != -1) {
+                post.Bookmark.splice(index)
+                msg = "deleted from Bookmark"
+            }
+            else {
+                post.Bookmark.push(userId)
+                msg = "Added to Bookmark"
+            }
+            return { success: true, msg, load: post }
+        }
+        else {
+            return { success: false, msg: "post not found" }
+        }
+    }
+
     // for addding new post 
     static addToDraft = (userId, caption, imageUrl) => {
         let newPost = new postModel(userId, caption, imageUrl);
@@ -119,18 +168,24 @@ export default class postModel {
         posts.push(newPost);
         return { success: true, newPost }
     }
+
     // all archieved posts 
     static allArchievedPosts(userId) {
         let filteredAllPosts = posts.filter(p => isArchived(userId, p) && !p.isDraft)
-        return { success: true, allPosts: filteredAllPosts }
+        return { success: true, msg: "all archieved posts", allPosts: filteredAllPosts }
     }
 
     // all Draft posts  
     static allDraftPosts(userId) {
         let filteredAllPosts = posts.filter(p => p.userId == userId && isArchived(userId, p) && p.isDraft)
-        return { success: true, allPosts: filteredAllPosts }
+        return { success: true, msg: "all drafted posts", allPosts: filteredAllPosts }
     }
 
+    // all bookmark posts 
+    static allBookmarkPosts(userId) {
+        let filteredPosts = posts.filter(p => !isArchived(userId, p) && !p.isDraft && isBookmark(userId, p))
+        return { success: true, msg: "all bookmark posts", allPosts: filteredPosts }
+    }
 
 }
 

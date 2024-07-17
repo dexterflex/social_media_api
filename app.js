@@ -11,7 +11,15 @@ import likeRouter from './src/features/likes/like.route.js';
 import { jwtAuth } from './src/middlewares/jwtAuth.js';
 import { infoLogger, warnLogger, errorLogger } from './src/handler/logger.js';
 import { ApplicationError } from './src/handler/errorHandler.js';
-import apiDocs from './swagger.json' assert {type: 'json'}
+import fs from 'fs'
+
+let apiDocs;
+
+try {
+    apiDocs = JSON.parse(fs.readFileSync('./swagger.json', 'utf-8'));
+} catch (err) {
+    console.error('Error importing JSON file:', err);
+}
 
 
 const app = express();

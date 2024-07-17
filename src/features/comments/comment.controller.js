@@ -2,7 +2,7 @@ import commentModel from "./comment.model.js"
 
 // for extracting commment 
 export const getComment = (req, res) => {
-    let response = commentModel.getComment(req.params.postId);
+    let response = commentModel.getComment(req.params.postId, req.query.page);
     return res.status(200).json(response)
 }
 

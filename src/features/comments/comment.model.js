@@ -9,10 +9,19 @@ export default class commentModel {
         this.content = content;
     }
 
-    // for extracting commment of a specific post
-    static getComment(postId) {
-        let allComments = comments.filter(c => c.postId == postId)
-        return { success: true, comments: allComments }
+    // Function to fetch comments of a specific post with pagination
+    static getComment(postId, page = 1, limit = 10) {
+        // Filter comments based on postId
+        let filteredComments = comments.filter(c => c.postId === postId);
+
+        // Calculate the start index of the subset of comments to fetch
+        const startIndex = (page - 1) * limit;
+
+        // Apply pagination: Slice the array to fetch only the subset of comments for the current page
+        let paginatedComments = filteredComments.slice(startIndex, startIndex + limit);
+
+        // Return the paginated result
+        return { success: true, comments: paginatedComments };
     }
 
     // for adding new commment to a specific post

@@ -2,7 +2,7 @@ import postModel from "./post.model.js"
 
 // for extracting all posts 
 export const allPosts = (req, res) => {
-    return res.status(200).json(postModel.allPosts(req.cookies.userId))
+    return res.status(200).json(postModel.allPosts(req.cookies.userId, req.query.page))
 }
 
 // for extracting posts based on id 
@@ -13,7 +13,7 @@ export const postById = (req, res) => {
 
 // for extracting posts of current user 
 export const getPost = (req, res) => {
-    let response = postModel.getPost(req.cookies.userId)
+    let response = postModel.getPost(req.cookies.userId, req.query.page)
     return res.status(200).json(response)
 }
 
@@ -77,6 +77,17 @@ export const toggleArchieve = (req, res) => {
     return res.status(404).send(response)
 }
 
+// for bookmark the post between archieved and unarchieved 
+export const toggleBookmark = (req, res) => {
+    let postId = req.params.postId;
+    let response = postModel.toggleBookmark(postId, req.cookies.userId)
+
+    if (response.success) {
+        return res.status(200).send(response)
+    }
+    return res.status(404).send(response)
+}
+
 // for addding new post in draft
 export const addToDraft = (req, res) => {
     let userId = req.cookies.userId;
@@ -99,4 +110,9 @@ export const allArchievedPosts = (req, res) => {
 // for extracting posts in draft 
 export const allDraftPosts = (req, res) => {
     return res.status(200).send(postModel.allDraftPosts(req.cookies.userId))
+}
+
+// for extracting posts in draft 
+export const allBookmarkPosts = (req, res) => {
+    return res.status(200).send(postModel.allBookmarkPosts(req.cookies.userId))
 }
